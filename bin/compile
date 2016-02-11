@@ -58,14 +58,10 @@ if [ -f packages.config -o -f */packages.config ]; then
    find  -name packages.config | xargs mono $NUGET install -o packages
 fi
 
-if [ -f app.fs ]; then
-  echo "-----> Compiling app"
-  ls
-  mono /app/mono/lib/mono/4.5/fsc.exe app.fs
-elif [ -f *.sln ]; then
-   echo "-----> Compiling application"
-   mono $XBUILD
-fi
+ echo "-----> Compiling application"
+ mono $XBUILD
+ ls
+
 
 mkdir -p ${BUILD_DIR}/.profile.d
 cp -n ${LP_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/

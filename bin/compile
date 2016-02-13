@@ -8,7 +8,7 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 # fail fast
 set -e
 
-MONO3_VM_BINARY="https://github.com/AdamBurgess/heroku-buildpack-mono/releases/download/mono-4.2.2.30/mono-full.tar.xz"
+MONO3_VM_BINARY="https://github.com/friism/mono-builder/releases/download/v4.2.0.207/mono-4.2.0.207.tar.gz"
 NUGET_BINARY="https://nuget.org/nuget.exe"
 PAKET_BINARY="https://github.com/fsprojects/Paket/releases/download/2.40.9/paket.exe"
 
@@ -18,7 +18,7 @@ XBUILD="${BUILD_DIR}/vendor/mono/lib/mono/4.5/xbuild.exe"
 echo "-----> Downloading mono to ${CACHE_DIR}/$STACK/vendor"
 if [ ! -d ${CACHE_DIR}/$STACK/vendor/mono ]; then
     mkdir -p ${CACHE_DIR}/$STACK/vendor
-    curl -L $MONO3_VM_BINARY -s | tar xJf - -C ${CACHE_DIR}/$STACK/vendor
+    curl -L $MONO3_VM_BINARY -s | tar zxf - -C ${CACHE_DIR}/$STACK/vendor
     curl $NUGET_BINARY -L -o "${CACHE_DIR}/$STACK/vendor/mono/bin/nuget.exe"
     curl $PAKET_BINARY -L -o "${CACHE_DIR}/$STACK/vendor/mono/bin/paket.exe"
 fi
